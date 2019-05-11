@@ -5,6 +5,7 @@ USE motojhonson;
 CREATE TABLE IF NOT EXISTS usuarios(
     id INT NOT NULL AUTO_INCREMENT,
     usuario VARCHAR(100) NOT NULL UNIQUE,
+    nome VARCHAR(100),
     telefone VARCHAR(20) NOT NULL,
     carteira FLOAT,
     senha VARCHAR(100) NOT NULL,
@@ -23,7 +24,6 @@ CREATE TABLE IF NOT EXISTS empresas(
 
 CREATE TABLE IF NOT EXISTS motoboys(
     USUARIO_id INT NOT NULL,
-    nome VARCHAR(100),
     cpf VARCHAR(20) NOT NULL UNIQUE,
     veiculo VARCHAR(100),
     disponivel BINARY DEFAULT 0,
