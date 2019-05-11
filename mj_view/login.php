@@ -171,12 +171,14 @@
         $("#mj_registro_e_bairro").prop("required", bool);
         $("#mj_registro_e_logradouro").prop("required", bool);
         $("#mj_registro_e_numero").prop("required", bool);
+        require_motojhonson(false);
     }
 
     function require_motojhonson(bool){
         $("#mj_registro_m_nome").prop("required", bool);
         $("#mj_registro_m_cpf").prop("required", bool);
         $("#mj_registro_m_veiculo").prop("required", bool);
+        require_empresa(false);
     }
 
     function alternar(fn){
@@ -197,7 +199,6 @@
             // ABRIR FORMULARIO EMPRESA
             case 2:
                 require_empresa(true);
-                require_motojhonson(false);
                 $("#motojhonson").hide(600);
                 $("#empresa").show(600);
                 tipo_cadastro = "EMPRESA";
@@ -205,7 +206,6 @@
 
             // ABRIR FORMULÁRIO MOTOJHONSON
             case 3:
-                require_empresa(false);
                 require_motojhonson(true);
                 $("#empresa").hide(600);
                 $("#motojhonson").show(600);
