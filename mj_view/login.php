@@ -171,14 +171,14 @@
         $("#mj_registro_e_bairro").prop("required", bool);
         $("#mj_registro_e_logradouro").prop("required", bool);
         $("#mj_registro_e_numero").prop("required", bool);
-        require_motojhonson(false);
+        require_motojhonson(!bool);
     }
 
     function require_motojhonson(bool){
         $("#mj_registro_m_nome").prop("required", bool);
         $("#mj_registro_m_cpf").prop("required", bool);
         $("#mj_registro_m_veiculo").prop("required", bool);
-        require_empresa(false);
+        require_empresa(!bool);
     }
 
     function alternar(fn){
