@@ -3,43 +3,41 @@ CREATE DATABASE IF NOT EXISTS motojhonson;
 USE motojhonson;
 
 CREATE TABLE IF NOT EXISTS usuarios(
-    id INT NOT NULL AUTO_INCREMENT,
-    usuario VARCHAR(100) NOT NULL UNIQUE,
+    usuario VARCHAR(100) NOT NULL,
     nome VARCHAR(100),
     telefone VARCHAR(20) NOT NULL,
     carteira FLOAT,
     senha VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     situacao BINARY DEFAULT 0,
-    PRIMARY KEY (id)
+    PRIMARY KEY (usuario)
 );
 
 CREATE TABLE IF NOT EXISTS empresas(
-    USUARIO_id INT NOT NULL,
-    nome VARCHAR(100),
+    USUARIOS_usuario VARCHAR(100) NOT NULL,
     cnpj VARCHAR(20) NOT NULL UNIQUE,
-    PRIMARY KEY (USUARIO_id),
-    FOREIGN KEY (USUARIO_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    PRIMARY KEY (USUARIOS_usuario),
+    FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS motoboys(
-    USUARIO_id INT NOT NULL,
+    USUARIOS_usuario VARCHAR(100) NOT NULL,
     cpf VARCHAR(20) NOT NULL UNIQUE,
     veiculo VARCHAR(100),
     disponivel BINARY DEFAULT 0,
-    PRIMARY KEY (USUARIO_id),
-    FOREIGN KEY (USUARIO_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    PPRIMARY KEY (USUARIOS_usuario),
+    FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS enderecos(
     id INT NOT NULL AUTO_INCREMENT,
-    USUARIO_id INT NOT NULL,
+    USUARIOS_usuario VARCHAR(100) NOT NULL,
     cep VARCHAR(30) NOT NULL,
-    cidade VARCHAR(100),
+    municipio VARCHAR(100),
     bairro VARCHAR(100),
-    rua VARCHAR(100),
+    logradouro VARCHAR(100),
     numero INT,
-    referencia VARCHAR(100),
+    uf VARCHAR(3),
     PRIMARY KEY (id),
-    FOREIGN KEY (USUARIO_id) REFERENCES usuarios(id) ON DELETE CASCADE
+    FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
 );
