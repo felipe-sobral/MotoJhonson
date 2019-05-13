@@ -34,7 +34,7 @@
 
         switch($_POST["acao"]){
 
-            case "inserir_UEE":
+            case "inserir_UM":
                 echo $controller->inserir_UM($_POST["usuario"], $_POST["motoboy"]);
                 break;
 

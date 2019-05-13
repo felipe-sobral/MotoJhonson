@@ -1,3 +1,14 @@
+/**
+ * 
+ * Scripts
+ * MOTOJHONSON
+ * View --> login.php
+ * 
+ * COMECO 
+ * 
+ */
+
+
 // true -> motojhonson
 // false -> empresa
 function required(bool){
@@ -38,7 +49,7 @@ function alternar(fn){
             required(false);
             $("#motojhonson").hide(600);
             $("#empresa").show(600);
-            tipo_cadastro = "EMPRESA";
+            tipo_cadastro = "Empresa";
             break;
 
         // ABRIR FORMULÁRIO MOTOJHONSON
@@ -46,7 +57,7 @@ function alternar(fn){
             required(true); 
             $("#empresa").hide(600);
             $("#motojhonson").show(600);
-            tipo_cadastro = "MOTOJHONSON";
+            tipo_cadastro = "Motojhonson";
             break;
 
         default:
@@ -85,28 +96,25 @@ function verificar_cnpj(){
 
 }
 
-function array_registro_motojhonson(){
-    /*
-        mj_registro_m_cpf
-        mj_registro_m_nome
-        mj_registro_m_veiculo
-    */
-    return{
+function registrar_motojhonson(usuario){
+
+    var motojhonson = {
+        usuario: $("#mj_registro_usuario").val(),
         cpf: $("#mj_registro_m_cpf").val(),
-        nome: $("#mj_registro_m_nome").val(),
         veiculo: $("#mj_registro_m_veiculo").val()
     }
+
+    $.post("mj_controller/ControllerMotoboy.php", {
+        usuario: usuario,
+        motoboy: motojhonson,
+        acao: "inserir_UM",
+    }).done(function(retorno){
+        console.log(retorno);
+    });
 }
 
-function registrar_empresa(){
-    var usuario = {
-        usuario: $("#mj_registro_usuario").val(),
-        senha: $("#mj_registro_senha").val(),
-        email: $("#mj_registro_email").val(),
-        telefone: $("#mj_registro_telefone").val(),
-        nome: $("#mj_registro_nome").val()
-    }
 
+function registrar_empresa(usuario){
     var empresa = {
         usuario: $("#mj_registro_usuario").val(),
         cnpj: $("#mj_registro_e_cnpj").val()
@@ -134,8 +142,19 @@ function registrar_empresa(){
 
 $("#mj_registrar").submit(function() {
 
-    // CONTINUAR AQUI
-    registrar_empresa();
+    var usuario = {
+        usuario: $("#mj_registro_usuario").val(),
+        senha: $("#mj_registro_senha").val(),
+        email: $("#mj_registro_email").val(),
+        telefone: $("#mj_registro_telefone").val(),
+        nome: $("#mj_registro_nome").val()
+    }
+
+    if(tipo_cadastro === "Empresa"){
+        registrar_empresa(usuario);
+    } else if(tipo_cadastro == "Motojhonson"){
+        registrar_motojhonson(usuario);
+    }    
 
     return false;
 });
