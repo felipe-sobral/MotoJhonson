@@ -5,10 +5,10 @@
     class Usuario extends Model{
         private $tabela = "usuarios";
         protected $usuario;
-        protected $senha;
-        protected $email;
-        protected $telefone; 
-        protected $nome;
+        private $senha;
+        private $email;
+        private $telefone; 
+        private $nome;
 
         public function __construct(){
 
@@ -27,7 +27,7 @@
         }
 
         public function setTelefone($valor){
-            $this->usuario = $valor;
+            $this->telefone = $valor;
         }
 
         public function setNome($valor){

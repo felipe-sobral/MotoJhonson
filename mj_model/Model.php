@@ -2,12 +2,8 @@
 
     class Model{
 
-        private static function conectar(){
-            include_once "../db/connect.php";
-        }
-
         private static function preparar($query, $dados){
-            self::conectar();
+            include "../db/connect.php";
 
             $sql = $conn->prepare($query);
             if($sql->execute($dados)){
@@ -17,8 +13,7 @@
             return false;
         }
 
-        public static function inserir($tabela, array $dados){
-
+        public static function inserir($tabela, $dados){
             $campos = implode(", ", array_keys($dados));
             $valores = ":".implode(", :", array_keys($dados));
 

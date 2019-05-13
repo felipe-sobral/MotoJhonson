@@ -86,13 +86,13 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><a onclick="verificar_cnpj()">Verificar</a></div>
                                 </div>
-                                <input type="text" class="form-control" id="mj_registro_cnpj">
+                                <input type="text" class="form-control" id="mj_registro_e_cnpj">
                             </div>
                         </div>
                         <div id="empresa-pt2" style="display:none">
                             <div class="form-group">
                                 <label for="mj_registro_e_nome">Nome fantasia</label>
-                                <input type="text" class="form-control" id="mj_registro_e_nome">
+                                <input type="text" class="form-control" id="mj_registro_nome">
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="form-group" style="text-align: center">
-                                <button type="submit" class="btn btn-success">Cadastrar</button>-->
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
                             </div>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group col-sm-8">
                                 <label for="mj_registro_m_nome">Nome completo</label>
-                                <input type="text" class="form-control" id="mj_registro_m_nome">
+                                <input type="text" class="form-control" id="mj_registro_nome">
                             </div>
                         </div>
                         <div class="form-group">

@@ -57,7 +57,7 @@ function alternar(fn){
 
 function verificar_cnpj(){
     
-    var cnpj = $("#mj_registro_cnpj").val();
+    var cnpj = $("#mj_registro_e_cnpj").val();
 
     $.ajax({
         url: "https://www.receitaws.com.br/v1/cnpj/"+cnpj,
@@ -68,7 +68,7 @@ function verificar_cnpj(){
             json = retorno.responseJSON;
             if(json.status == "OK") {
 
-                $("#mj_registro_e_nome").val(json.fantasia);
+                $("#mj_registro_nome").val(json.fantasia);
                 $("#mj_registro_e_uf").val(json.uf);
                 $("#mj_registro_e_bairro").val(json.bairro);
                 $("#mj_registro_e_logradouro").val(json.logradouro);
@@ -85,25 +85,6 @@ function verificar_cnpj(){
 
 }
 
-function array_registro_empresa(){
-    /*
-        mj_registro_usuario
-        mj_registro_senha
-        mj_registro_email
-        mj_registro_telefone
-    */
-    return {
-        cnpj: $("#mj_registro_cnpj").val(),
-        nome: $("#mj_registro_e_nome").val(),
-        cep: $("#mj_registro_e_cep").val(),
-        municipio: $("#mj_registro_e_municipio").val(),
-        uf: $("#mj_registro_e_uf").val(),
-        bairro: $("#mj_registro_e_bairro").val(),
-        logradouro: $("#mj_registro_e_logradouro").val(),
-        numero: $("#mj_registro_e_numero").val()
-    }
-}
-
 function array_registro_motojhonson(){
     /*
         mj_registro_m_cpf
@@ -117,22 +98,44 @@ function array_registro_motojhonson(){
     }
 }
 
-$("#mj_registrar").submit(function() {
-    var dados = array_registro_motojhonson();
-
-    if(tipo_cadastro === "EMPRESA"){
-        dados = array_registro_empresa();
-    }
-
-    $.post("#", {
+function registrar_empresa(){
+    var usuario = {
         usuario: $("#mj_registro_usuario").val(),
         senha: $("#mj_registro_senha").val(),
         email: $("#mj_registro_email").val(),
         telefone: $("#mj_registro_telefone").val(),
-        info: dados,
-        tipo: tipo_cadastro
+        nome: $("#mj_registro_nome").val()
+    }
+
+    var empresa = {
+        usuario: $("#mj_registro_usuario").val(),
+        cnpj: $("#mj_registro_e_cnpj").val()
+    }
+
+    var endereco = {
+        usuario: $("#mj_registro_usuario").val(),
+        cep: $("#mj_registro_e_cep").val(),
+        municipio: $("#mj_registro_e_municipio").val(),
+        uf: $("#mj_registro_e_uf").val(),
+        bairro: $("#mj_registro_e_bairro").val(),
+        logradouro: $("#mj_registro_e_logradouro").val(),
+        numero: $("#mj_registro_e_numero").val()
+    }
+
+    $.post("mj_controller/ControllerEmpresa.php", {
+        usuario: usuario,
+        empresa: empresa,
+        endereco: endereco,
+        acao: "inserir_UEE"
     }).done(function(retorno){
         console.log(retorno);
     });
+}
 
+$("#mj_registrar").submit(function() {
+
+    // CONTINUAR AQUI
+    registrar_empresa();
+
+    return false;
 });

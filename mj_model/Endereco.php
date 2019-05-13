@@ -8,7 +8,6 @@
         private $uf;
         private $logradouro;
         private $municipio;
-        private $rua;
         private $numero;
         private $bairro;
         private $proprietario;
@@ -33,10 +32,6 @@
             $this->municipio = $valor;
         }
 
-        public function setRua($valor){
-            $this->rua = $valor;
-        }
-
         public function setNumero($valor){
             $this->numero = $valor;
         }
@@ -55,7 +50,6 @@
                 "cep" => $this->cep,
                 "logradouro" => $this->logradouro,
                 "municipio" => $this->municipio,
-                "rua" => $this->rua,
                 "numero" => $this->numero,
                 "bairro" => $this->bairro,
                 "uf" => $this->uf

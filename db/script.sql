@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
     usuario VARCHAR(100) NOT NULL,
     nome VARCHAR(100),
     telefone VARCHAR(20) NOT NULL,
-    carteira FLOAT,
+    carteira FLOAT DEFAULT 0,
     senha VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     situacao BINARY DEFAULT 0,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS motoboys(
     cpf VARCHAR(20) NOT NULL UNIQUE,
     veiculo VARCHAR(100),
     disponivel BINARY DEFAULT 0,
-    PPRIMARY KEY (USUARIOS_usuario),
+    PRIMARY KEY (USUARIOS_usuario),
     FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS enderecos(
     municipio VARCHAR(100),
     bairro VARCHAR(100),
     logradouro VARCHAR(100),
-    numero INT,
+    numero VARCHAR(10),
     uf VARCHAR(3),
     PRIMARY KEY (id),
     FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE

@@ -1,5 +1,5 @@
 <?php
-    $cfg = require_once "cfg.php";
+    $cfg = require "cfg.php";
 
     try {
         $conn = new PDO("mysql:host={$cfg['db']['host']};dbname={$cfg['db']['dbname']};charset={$cfg['db']['charset']}",
