@@ -43,4 +43,12 @@
                 "nome" => $this->nome
             ]);
         }
+        
+        public function verificar_usuario(){
+            return parent::selecionar_demo($this->usuario, $this->senha);
+        }
+        
     }
+
+
+    

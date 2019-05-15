@@ -24,12 +24,21 @@
 
             isset($_SESSION) ?  : session_start();
 
-            $_SESSION["mj_login_tipo"] = "motoboy";
-            $_SESSION["mj_login_senha"] = $motoboy["senha"] ? : "#unknow#";
             $_SESSION["mj_login_usuario"] = $motoboy["usuario"] ? : "#unknow#";
+            $_SESSION["mj_login_senha"] = $motoboy["senha"] ? : "#unknow#";
             $_SESSION["mj_login_cpf"] = $motoboy["cpf"] ? : "#unknow#";
+            $_SESSION["mj_login_cnpj"] = $motobou["cnpj"] ? : "#unknow#";
 
             print_r($_SESSION); // CONTINUAR AQUI
+        }
+
+        public function verificar_login($usuario, $senha){
+            $moto = new Motoboy;
+
+            $moto->setUsuario($usuario);
+            $moto->setSenha($senha);
+
+            $this->criar_sessao($moto->verificar_usuario());
         }
 
     }

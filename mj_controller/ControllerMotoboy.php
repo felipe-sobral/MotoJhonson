@@ -1,9 +1,4 @@
 <?php
-
-    ini_set('display_errors',1);
-    ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
-
     require_once "ControllerUsuario.php";
     require_once "../mj_model/Motoboy.php";
 
@@ -25,16 +20,6 @@
             self::inserir($motoboy);
         }
 
-        public function verificar_login($usuario, $senha){
-            $moto = new Motoboy;
-
-            $moto->setUsuario($usuario);
-            $moto->setSenha($senha);
-
-            $this->criar_sessao($moto->verificar_usuario());
-        }
-
-
     }
 
     $controller = new ControllerMotoboy;
@@ -45,10 +30,6 @@
 
             case "inserir_UM":
                 echo $controller->inserir_UM($_POST["usuario"], $_POST["motoboy"]);
-                break;
-
-            case "login":
-                $controller->verificar_login($_POST["usuario"], $_POST["senha"]);
                 break;
 
             default:

@@ -29,11 +29,4 @@
             ]);
         }
 
-        //selecionar_innerjoin($colunas, $tabelas_a, $tabelas_b, $c_on, $c_where)
-        public function verificar_usuario(){
-            return parent::selecionar_innerjoin(["*"], ["usuarios"], [$this->tabela], 
-                                                ["usuarios.usuario = {$this->tabela}.USUARIOS_usuario"],
-                                                ["usuarios.usuario" => $this->usuario, "usuarios.senha" => $this->senha]);
-        }
-
     }

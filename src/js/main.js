@@ -158,3 +158,15 @@ $("#mj_registrar").submit(function() {
 
     return false;
 });
+
+$("#mj_login").submit(function(){
+
+    $.post("mj_controller/ControllerUsuario.php", {
+        usuario: $("#mj_usuario").val(),
+        senha: $("#mj_senha").val()}).done(function(retorno){
+            
+        console.log(retorno);
+    })
+
+    return false;
+})

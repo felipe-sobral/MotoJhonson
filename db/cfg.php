@@ -3,7 +3,7 @@
         "db"=>[
             "host" => "localhost",
             "dbname" => "motojhonson",
-            "username" => "felipe",
+            "username" => "root",
             "password" => "root",
             "charset" => "utf8"
         ]

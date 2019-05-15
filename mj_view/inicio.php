@@ -1,5 +1,8 @@
 <div id="inicio">
     <div class="topo">
+        <div class="row align-items-center" style="width: 100%">
+            <a href="?pg=login" style="width: 100%; text-align: right; text-decoration: none">Entrar</a>
+        </div>
         <div class="row align-items-center" style="width: 100%; height: 100%">
             <div class="col">
                 <img src="src/img/logo_branca.svg" style="width: 35%; min-width: 200px">

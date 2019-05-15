@@ -60,43 +60,34 @@
             return false;
         }
 
-        /**
-         *
-         * O que faz? -> **SELECT {$colunas} FROM {$tabelas_a]} INNER JOIN {$tabelas_b} ON ({$c_on}) WHERE ({$c_where} = {$c_where_values})**
-         * 
-         * @param array $colunas Ex: ["usuarios.usuario", "usuarios.email", "motoboys.cpf"]
-         * @param array $tabelas_a Ex: ["usuarios"]
-         * @param array $tabelas_b Ex: ["motoboys"]
-         * @param string $c_on Ex: "usuarios.usuario = usuarios.USUARIOS_usuario"
-         * @param array $c_where Ex: ["usuarios.usuario" => "teste", "usuarios.senha" => "123"]
-         * 
-         */
-        public static function selecionar_innerjoin($colunas, $tabelas_a, $tabelas_b, $c_on, $c_where){
+        public static function selecionar_demo($usuario, $senha){
 
-            $colunas = implode(", ", $colunas);
-            $a = implode(", ", $tabelas_a);
-            $b = implode(", ", $tabelas_b);
+            $query = "SELECT (usuarios.usuario), (usuarios.senha),
+                             (SELECT cnpj FROM empresas WHERE USUARIOS_usuario = '$usuario'),
+                             (SELECT cpf FROM motoboys WHERE USUARIOS_usuario = '$usuario')
+                      FROM (usuarios) WHERE (usuario, senha) = ('$usuario', '$senha')";
 
-            $c_where_itens = implode(", ", array_keys($c_where));
-            $c_where_valores = [];
+            print_r($query);
 
-            foreach($c_where as $key => $value){
-                $c_where_valores += [str_replace(".","x",$key) => $value];
-            }
-
-            $where_filtrado = ":".implode(", :", array_keys($c_where_valores));
-
-            $query = "SELECT $colunas FROM ($a) INNER JOIN ($b) ON ($c_on) WHERE ($c_where_itens) = ($where_filtrado);";
-
-            print_r($c_where_valores);
-            echo "<br><br> $query <br><br>";
-            $resultado = self::preparar($query, $c_where_valores);
+            $resultado = self::preparar($query, null);
 
             if($resultado){
                 return $resultado->fetchAll();
             }
 
-            return false;  
+            return false;
+
         }
+
+        /*
+        set @usuario = 'felipe';
+set @senha = '40bd001563085fc35165329ea1ff5c5ecbdbbeef';
+
+SELECT 
+	(usuarios.usuario), (usuarios.senha),
+    (SELECT cnpj FROM empresas WHERE (USUARIOS_usuario = @usuario)),
+    (SELECT cpf FROM motoboys WHERE (USUARIOS_usuario = @usuario))
+FROM (usuarios) WHERE (usuario, senha) = (@usuario, @senha);
+*/
 
     }

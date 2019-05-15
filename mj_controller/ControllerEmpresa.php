@@ -1,9 +1,4 @@
 <?php
-
-    ini_set('display_errors',1);
-    ini_set('display_startup_erros',1);
-    error_reporting(E_ALL);
-
     require_once "ControllerUsuario.php";
     require_once "ControllerEndereco.php";
     require_once "../mj_model/Empresa.php";
@@ -26,15 +21,6 @@
             ControllerEndereco::inserir($endereco);
         }
 
-        public function verificar_login($usuario, $senha){
-            $moto = new Empresa;
-
-            $moto->setUsuario($usuario);
-            $moto->setSenha($senha);
-
-            $this->criar_sessao($moto->verificar_usuario());
-        }
-
 
     }
 
@@ -46,10 +32,6 @@
 
             case "inserir_UEE":
                 echo $controller->inserir_UEE($_POST["usuario"], $_POST["empresa"], $_POST["endereco"]);
-                break;
-
-            case "login":
-                $controller->verificar_login($_POST["usuario"], $_POST["senha"]);
                 break;
 
             default:

@@ -2,7 +2,7 @@
     <div class="topo-padrao">
         <div class="row align-items-center" style="width: 100%; height: 100%">
             <div class="col">
-                <img src="src/img/logo_branca.svg" style="width: 10%; min-width: 200px">
+                <a href="?pg=index"><img src="src/img/logo_branca.svg" style="width: 10%; min-width: 200px"></a>
             </div>
         </div>
     </div>
