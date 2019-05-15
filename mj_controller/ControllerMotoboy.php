@@ -25,6 +25,15 @@
             self::inserir($motoboy);
         }
 
+        public function verificar_login($usuario, $senha){
+            $moto = new Motoboy;
+
+            $moto->setUsuario($usuario);
+            $moto->setSenha($senha);
+
+            $this->criar_sessao($moto->verificar_usuario());
+        }
+
 
     }
 
@@ -36,6 +45,10 @@
 
             case "inserir_UM":
                 echo $controller->inserir_UM($_POST["usuario"], $_POST["motoboy"]);
+                break;
+
+            case "login":
+                $controller->verificar_login($_POST["usuario"], $_POST["senha"]);
                 break;
 
             default:

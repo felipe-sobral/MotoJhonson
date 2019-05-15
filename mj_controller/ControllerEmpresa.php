@@ -26,6 +26,15 @@
             ControllerEndereco::inserir($endereco);
         }
 
+        public function verificar_login($usuario, $senha){
+            $moto = new Empresa;
+
+            $moto->setUsuario($usuario);
+            $moto->setSenha($senha);
+
+            $this->criar_sessao($moto->verificar_usuario());
+        }
+
 
     }
 
@@ -37,6 +46,10 @@
 
             case "inserir_UEE":
                 echo $controller->inserir_UEE($_POST["usuario"], $_POST["empresa"], $_POST["endereco"]);
+                break;
+
+            case "login":
+                $controller->verificar_login($_POST["usuario"], $_POST["senha"]);
                 break;
 
             default:
