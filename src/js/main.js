@@ -162,10 +162,13 @@ $("#mj_registrar").submit(function() {
 $("#mj_login").submit(function(){
 
     $.post("mj_controller/ControllerUsuario.php", {
-        usuario: $("#mj_usuario").val(),
-        senha: $("#mj_senha").val()}).done(function(retorno){
+        usuario: $("#mj_cpfcnpj").val(),
+        senha: $("#mj_senha").val(),
+        acao: "logar"
+    }).done(function(retorno){
             
         console.log(retorno);
+
     })
 
     return false;

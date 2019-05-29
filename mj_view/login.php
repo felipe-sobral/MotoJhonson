@@ -17,8 +17,8 @@
                 <!-- FORMULÁRIO LOGIN -->
                 <form id="mj_login">
                     <div class="form-group">
-                        <label for="mj_usuario">Usuário</label>
-                        <input type="text" class="form-control" id="mj_usuario" placeholder="Insira seu usuário" required>
+                        <label for="mj_cpfcnpj">CPF/CNPJ</label>
+                        <input type="text" class="form-control" id="mj_cpfcnpj" placeholder="Insira CPF/CNPJ para entrar" required>
                     </div>
                     <div class="form-group">
                         <label for="mj_senha">Senha</label>

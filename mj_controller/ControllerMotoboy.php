@@ -32,6 +32,10 @@
                 echo $controller->inserir_UM($_POST["usuario"], $_POST["motoboy"]);
                 break;
 
+            case "logar":
+                echo "123";
+                break;
+
             default:
                 print("Acao invalida!");
 
