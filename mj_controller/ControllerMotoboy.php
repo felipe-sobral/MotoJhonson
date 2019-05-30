@@ -20,6 +20,17 @@
             self::inserir($motoboy);
         }
 
+        public static function logar($cpf, $senha){
+
+            $moto = new Motoboy;
+
+            $moto->setCpf($cpf);
+            $moto->setSenha($senha);
+
+            $motoboy = $moto->buscar();
+
+        }
+
     }
 
     $controller = new ControllerMotoboy;

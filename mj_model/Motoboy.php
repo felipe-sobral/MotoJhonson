@@ -29,4 +29,11 @@
             ]);
         }
 
+        public function buscar(){
+            return parent::selecionar_valorigual($this->tabela, ["*"], [
+                "cpf" => $this->cpf,
+                "senha" => $this->senha
+            ]);
+        }
+
     }

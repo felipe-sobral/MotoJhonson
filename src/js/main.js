@@ -159,10 +159,37 @@ $("#mj_registrar").submit(function() {
     return false;
 });
 
+function cnpj_cpf(codigo){
+    
+    switch(codigo.length){
+
+        case 11:
+            return "CPF";
+
+        case 14:
+            return "CNPJ";
+
+        default:
+            return false;
+
+    }
+
+}
+
 $("#mj_login").submit(function(){
 
-    $.post("mj_controller/ControllerUsuario.php", {
-        usuario: $("#mj_cpfcnpj").val(),
+
+    var url = "mj_controller/";
+    var tipo = cnpj_cpf($("#mj_cpfcnpj").val());
+
+    if(tipo == "CPF"){
+        url = url+"ControllerMotoboy.php";
+    } else if(tipo == "CNPJ"){
+        url = url+"ControllerEmpresa.php";
+    }    
+
+    $.post(url, {
+        registro: $("#mj_cpfcnpj").val(),
         senha: $("#mj_senha").val(),
         acao: "logar"
     }).done(function(retorno){
