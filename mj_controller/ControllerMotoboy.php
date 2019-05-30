@@ -15,9 +15,23 @@
         }
 
         //inserir_USUARIO_MOTOBOY
-        public function inserir_UM($usuario, $motoboy){
+        public static function inserir_UM($usuario, $motoboy){
             parent::inserir($usuario);
             self::inserir($motoboy);
+        }
+
+        private static function criar_sessao_motoboy($m){
+            
+            parent::criar_sessao($m);
+
+            $_SESSION["mj_login"] += [
+                "cpf" => $m["cpf"],
+                "veiculo" => $m["veiculo"],
+                "disponivel" => $m["disponivel"],
+                "tipo" => "MOTOJHONSON"
+            ];
+
+            print_r($_SESSION["mj_login"]);
         }
 
         public static function logar($cpf, $senha){
@@ -25,30 +39,26 @@
             $moto = new Motoboy;
 
             $moto->setCpf($cpf);
-            $moto->setSenha($senha);
+            $moto->setSenha(sha1($senha));
 
             $motoboy = $moto->buscar();
 
+            return !empty($motoboy) ? self::criar_sessao_motoboy($motoboy[0]) : "LOGIN INVÁLIDO";
         }
 
     }
-
-    $controller = new ControllerMotoboy;
 
     if(isset($_POST["acao"])){
 
         switch($_POST["acao"]){
 
-            case "inserir_UM":
-                echo $controller->inserir_UM($_POST["usuario"], $_POST["motoboy"]);
+            case "inserir_motoboy":
+                echo ControllerMotoboy::inserir_UM($_POST["usuario"], $_POST["motoboy"]);
                 break;
 
             case "logar":
-                echo "123";
+                echo ControllerMotoboy::logar($_POST["registro"], $_POST["senha"]);
                 break;
-
-            default:
-                print("Acao invalida!");
 
         }
 

@@ -5,10 +5,10 @@
     class Usuario extends Model{
         private $tabela = "usuarios";
         protected $usuario;
-        private $senha;
-        private $email;
-        private $telefone; 
-        private $nome;
+        protected $senha;
+        protected $email;
+        protected $telefone; 
+        protected $nome;
 
         public function __construct(){
 

@@ -30,10 +30,17 @@
         }
 
         public function buscar(){
-            return parent::selecionar_valorigual($this->tabela, ["*"], [
-                "cpf" => $this->cpf,
-                "senha" => $this->senha
-            ]);
+            $tb_usuarios = "usuarios";
+
+            return parent::selecionar_igual(
+                [$tb_usuarios, $this->tabela],
+                "*",
+                [
+                    "$tb_usuarios.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                    "$tb_usuarios.senha" => $this->senha,
+                    "{$this->tabela}.cpf" => $this->cpf
+                ]
+            );
         }
 
     }

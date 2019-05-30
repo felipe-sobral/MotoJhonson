@@ -107,7 +107,7 @@ function registrar_motojhonson(usuario){
     $.post("mj_controller/ControllerMotoboy.php", {
         usuario: usuario,
         motoboy: motojhonson,
-        acao: "inserir_UM",
+        acao: "inserir_motoboy",
     }).done(function(retorno){
         console.log(retorno);
     });
@@ -134,7 +134,7 @@ function registrar_empresa(usuario){
         usuario: usuario,
         empresa: empresa,
         endereco: endereco,
-        acao: "inserir_UEE"
+        acao: "inserir_empresa"
     }).done(function(retorno){
         console.log(retorno);
     });

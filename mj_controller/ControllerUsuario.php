@@ -20,31 +20,18 @@
             return $usr->cadastrar();
         }
 
-        /*
-        protected function criar_sessao($motoboy){
+        protected static function criar_sessao($u){
+            isset($_SESSION) ? : session_start();
 
-            if(!is_array($motoboy)){
-                return false;
-            }
-
-            isset($_SESSION) ?  : session_start();
-
-            $_SESSION["mj_login_usuario"] = $motoboy["usuario"] ? : "#unknow#";
-            $_SESSION["mj_login_senha"] = $motoboy["senha"] ? : "#unknow#";
-            $_SESSION["mj_login_cpf"] = $motoboy["cpf"] ? : "#unknow#";
-            $_SESSION["mj_login_cnpj"] = $motobou["cnpj"] ? : "#unknow#";
-
-            print_r($_SESSION); // CONTINUAR AQUI
+            $_SESSION["mj_login"] = [
+                "id" => $u["id"],
+                "usuario" => $u["usuario"],
+                "carteira" => $u["carteira"],
+                "telefone" => $u["telefone"],
+                "email" => $u["email"],
+                "situacao" => $u["situacao"]
+            ];
         }
-
-        public function verificar_login($usuario, $senha){
-            $moto = new Motoboy;
-
-            $moto->setUsuario($usuario);
-            $moto->setSenha($senha);
-
-            $this->criar_sessao($moto->verificar_usuario());
-        }*/
 
     }
 
@@ -53,9 +40,6 @@
     if(isset($_POST["acao"])){
 
         switch($_POST["acao"]){
-
-            default:
-                print("Acao invalida!");
 
         }
 
