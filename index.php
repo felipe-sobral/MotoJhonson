@@ -12,6 +12,10 @@
             case "cadastrar":
                 require_once "mj_view/login.php#cadastrar";
                 break;
+            
+            case "painel":
+                require_once "mj_view/painel.php";
+                break;
 
             default:
                 require_once "mj_view/inicio.php";

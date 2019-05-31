@@ -79,7 +79,7 @@ function verificar_cnpj(){
             json = retorno.responseJSON;
             if(json.status == "OK") {
 
-                $("#mj_registro_nome").val(json.fantasia);
+                $("#mj_registro_e_nome").val(json.fantasia);
                 $("#mj_registro_e_uf").val(json.uf);
                 $("#mj_registro_e_bairro").val(json.bairro);
                 $("#mj_registro_e_logradouro").val(json.logradouro);
@@ -122,6 +122,7 @@ function registrar_empresa(usuario){
 
     var endereco = {
         usuario: $("#mj_registro_usuario").val(),
+        nome: $("#mj_registro_e_nome").val(),
         cep: $("#mj_registro_e_cep").val(),
         municipio: $("#mj_registro_e_municipio").val(),
         uf: $("#mj_registro_e_uf").val(),
@@ -146,13 +147,14 @@ $("#mj_registrar").submit(function() {
         usuario: $("#mj_registro_usuario").val(),
         senha: $("#mj_registro_senha").val(),
         email: $("#mj_registro_email").val(),
-        telefone: $("#mj_registro_telefone").val(),
-        nome: $("#mj_registro_nome").val()
+        telefone: $("#mj_registro_telefone").val()
     }
 
     if(tipo_cadastro === "Empresa"){
+        Object.assign(usuario, {nome: $("#mj_registro_e_nome").val()});
         registrar_empresa(usuario);
     } else if(tipo_cadastro == "Motojhonson"){
+        Object.assign(usuario, {nome: $("#mj_registro_m_nome").val()});
         registrar_motojhonson(usuario);
     }    
 

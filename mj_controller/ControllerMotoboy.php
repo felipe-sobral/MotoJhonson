@@ -10,7 +10,7 @@
             $moto->setCpf($dados["cpf"]);
             $moto->setVeiculo($dados["veiculo"]);
             $moto->setUsuario($dados["usuario"]);
-
+            
             $moto->cadastrar();
         }
 

@@ -91,8 +91,8 @@
                         </div>
                         <div id="empresa-pt2" style="display:none">
                             <div class="form-group">
-                                <label for="mj_registro_nome">Nome fantasia</label>
-                                <input type="text" class="form-control" id="mj_registro_nome">
+                                <label for="mj_registro_e_nome">Nome fantasia</label>
+                                <input type="text" class="form-control" id="mj_registro_e_nome">
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
@@ -136,8 +136,8 @@
                                 <input type="text" class="form-control" id="mj_registro_m_cpf">
                             </div>
                             <div class="form-group col-sm-8">
-                                <label for="mj_registro_nome">Nome completo</label>
-                                <input type="text" class="form-control" id="mj_registro_nome">
+                                <label for="mj_registro_m_nome">Nome completo</label>
+                                <input type="text" class="form-control" id="mj_registro_m_nome">
                             </div>
                         </div>
                         <div class="form-group">
