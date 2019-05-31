@@ -29,7 +29,8 @@
                 "carteira" => $u["carteira"],
                 "telefone" => $u["telefone"],
                 "email" => $u["email"],
-                "situacao" => $u["situacao"]
+                "situacao" => $u["situacao"],
+                "nome" => $u["nome"]
             ];
         }
 

@@ -10,7 +10,7 @@
         carteira FLOAT DEFAULT 0,
         senha VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
-        situacao BINARY DEFAULT 0,
+        situacao BINARY DEFAULT 1,
         PRIMARY KEY (id)
     );
 

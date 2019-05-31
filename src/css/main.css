@@ -45,3 +45,8 @@
 .rodape{
     text-align: center
 }
+
+#informacoesdaconta, #propostas{
+    margin-top: 1%;
+    text-align: left;
+}
