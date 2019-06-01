@@ -10,7 +10,7 @@
         carteira FLOAT DEFAULT 0,
         senha VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
-        situacao ENUM(0,1) DEFAULT 1,
+        situacao ENUM("0","1") DEFAULT "1",
         PRIMARY KEY (id)
     );
 
@@ -27,7 +27,9 @@
         USUARIOS_usuario VARCHAR(100) NOT NULL UNIQUE,
         cpf VARCHAR(20) NOT NULL UNIQUE,
         veiculo VARCHAR(100),
-        disponivel ENUM(0,1) DEFAULT 1,
+        valor_hora VARCHAR(20) DEFAULT "0",
+        valor_fixo VARCHAR(20) DEFAULT "0",
+        disponivel ENUM("0","1") DEFAULT "1",
         PRIMARY KEY (id),
         FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
     );
@@ -45,18 +47,37 @@
         FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS propostas(
+        id INT NOT NULL AUTO_INCREMENT,
+        MOTOBOYS_usuario VARCHAR(100) NOT NULL,
+        EMPRESA_usuario VARCHAR(100) NOT NULL,
+        ENDERECOS_id INT NOT NULL,
+        valor VARCHAR(20) NOT NULL,
+        valor_tipo ENUM("HORA", "FIXO"),
+        situacao ENUM("RECUSADA", "ACEITA", "EM ANDAMENTO", "ESPERANDO") DEFAULT "ESPERANDO",
+        PRIMARY KEY (id),
+        FOREIGN KEY (MOTOBOYS_usuario) REFERENCES motoboys(USUARIOS_usuario) ON DELETE CASCADE,
+        FOREIGN KEY (EMPRESA_usuario) REFERENCES empresas(USUARIOS_usuario) ON DELETE CASCADE,
+        FOREIGN KEY (ENDERECOS_id) REFERENCES enderecos(id) ON DELETE CASCADE
+    );
 
+    INSERT INTO usuarios (usuario, nome, telefone, senha, email) VALUES
+    ("pedro", "Pedro", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "pedro@gmail.com"),
+    ("luan", "Luan", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "luan@gmail.com"),
+    ("felipe", "Felipe S.", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "felipe@gmail.com"),
+    ("lohlanches", "Loh Lanches", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "lohlanches@gmail.com"),
+    ("scooby", "Scooby", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "scooby@gmail.com");
 
-    INSERT INTO usuarios (usuario, nome, telefone, senha, email) VALUES ("pedro", "Pedro", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "pedro@gmail.com");
-    INSERT INTO usuarios (usuario, nome, telefone, senha, email) VALUES ("luan", "Luan", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "luan@gmail.com");
-    INSERT INTO usuarios (usuario, nome, telefone, senha, email) VALUES ("lohlanches", "Loh Lanches", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "lohlanches@gmail.com");
-    INSERT INTO usuarios (usuario, nome, telefone, senha, email) VALUES ("scooby", "Scooby", "00000000000", "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "scooby@gmail.com");
+    INSERT INTO motoboys (USUARIOS_usuario, cpf, veiculo) VALUES 
+    ("felipe", "12345678991", "moto_teste"),
+    ("luan", "12345678992", "moto_teste"),
+    ("pedro", "12345678993", "moto_teste");
 
-    INSERT INTO motoboys (USUARIOS_usuario, cpf) VALUES ("pedro", "0000000001");
-    INSERT INTO motoboys (USUARIOS_usuario, cpf) VALUES ("luan", "0000000002");
+    INSERT INTO empresas (USUARIOS_usuario, cnpj) VALUES 
+    ("lohlanches", "12345678912341"),
+    ("Scooby", "12345678912342");
 
-    INSERT INTO empresas (USUARIOS_usuario, cnpj) VALUES ("lohlanches", "00000000000001");
-    INSERT INTO empresas (USUARIOS_usuario, cnpj) VALUES ("scooby", "00000000000002");
-
-    INSERT INTO enderecos (USUARIOS_usuario, cep, municipio, bairro, logradouro, numero, uf) VALUES ("lohlanches", "859590000", "Palotina", "Centro", "Principal", "000", "PR");
-    INSERT INTO enderecos (USUARIOS_usuario, cep, municipio, bairro, logradouro, numero, uf) VALUES ("scooby", "859590000", "Palotina", "Principal", "Centro", "000", "PR");
+    INSERT INTO enderecos (USUARIOS_usuario, cep, municipio, bairro, logradouro, numero, uf) VALUES 
+    ("lohlanches", "85950000", "Palotina", "Loh Centro", "Principal", "000", "PR"),
+    ("Scooby", "85950000", "Palotina", "Rua Scooby", "Principal", "000", "PR");
+    
