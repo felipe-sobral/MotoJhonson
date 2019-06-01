@@ -201,4 +201,30 @@ $("#mj_login").submit(function(){
     })
 
     return false;
-})
+});
+
+function ficar_disponivel(){
+
+    if(disponivel_g == 1){
+        disponivel_g = 0;
+    } else {
+        disponivel_g = 1;
+    }
+
+    $.post("mj_controller/ControllerMotoboy.php", {disponivel: disponivel_g, acao: "ficar_disponivel_session"}).done(function(retorno){
+
+        if(retorno == "#true#"){
+            // disponivel = !disponivel
+            if(disponivel_g){
+                $("#disponivel-icon").html("<span id='disponivel_true' class='fas fa-check-circle' style='color: #48e80d'></span>");
+            } else {
+                $("#disponivel-icon").html("<span id='disponivel_false' class='fas fa-times-circle' style='color: #e84b0c'></span>");
+            }
+
+        } else {
+            alert("error");
+        }
+
+    });
+
+}

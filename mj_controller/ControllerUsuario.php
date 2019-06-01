@@ -30,7 +30,8 @@
                 "telefone" => $u["telefone"],
                 "email" => $u["email"],
                 "situacao" => $u["situacao"],
-                "nome" => $u["nome"]
+                "nome" => $u["nome"],
+                "senha" => $u["senha"]
             ];
         }
 

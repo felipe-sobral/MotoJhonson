@@ -3,9 +3,11 @@
     require_once "Usuario.php";
 
     class Motoboy extends Usuario{
+        private $tb_usuarios = "usuarios";
         private $tabela = "motoboys";
         private $cpf;
         private $veiculo;
+        private $disponivel;
 
         public function __construct(){
 
@@ -21,6 +23,10 @@
             $this->veiculo = $valor;
         }
 
+        public function setDisponivel($valor){
+            $this->disponivel = $valor;
+        }
+
         public function cadastrar(){
             parent::inserir($this->tabela, [
                 "USUARIOS_usuario" => $this->usuario,
@@ -30,17 +36,25 @@
         }
 
         public function buscar(){
-            $tb_usuarios = "usuarios";
-
             return parent::selecionar_igual(
-                [$tb_usuarios, $this->tabela],
+                [$this->tb_usuarios, $this->tabela],
                 "*",
                 [
-                    "$tb_usuarios.usuario" => "{$this->tabela}.USUARIOS_usuario",
-                    "$tb_usuarios.senha" => $this->senha,
+                    "{$this->tb_usuarios}.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                    "{$this->tb_usuarios}.senha" => $this->senha,
                     "{$this->tabela}.cpf" => $this->cpf
                 ]
             );
+        }
+
+        public function disponivel(){
+
+            return parent::editar(
+                [$this->tb_usuarios, $this->tabela],
+                ["{$this->tabela}.disponivel" => $this->disponivel],
+                ["{$this->tabela}.cpf" => $this->cpf]
+            );
+
         }
 
     }

@@ -10,7 +10,7 @@
         carteira FLOAT DEFAULT 0,
         senha VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
-        situacao BINARY DEFAULT 1,
+        situacao ENUM(0,1) DEFAULT 1,
         PRIMARY KEY (id)
     );
 
@@ -27,7 +27,7 @@
         USUARIOS_usuario VARCHAR(100) NOT NULL UNIQUE,
         cpf VARCHAR(20) NOT NULL UNIQUE,
         veiculo VARCHAR(100),
-        disponivel BINARY DEFAULT 0,
+        disponivel ENUM(0,1) DEFAULT 1,
         PRIMARY KEY (id),
         FOREIGN KEY (USUARIOS_usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE
     );

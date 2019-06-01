@@ -53,7 +53,7 @@
         switch($_POST["acao"]){
 
             case "inserir_empresa":
-                echo ControllerEmpresa::nserir_UEE($_POST["usuario"], $_POST["empresa"], $_POST["endereco"]);
+                echo ControllerEmpresa::inserir_UEE($_POST["usuario"], $_POST["empresa"], $_POST["endereco"]);
                 break;
 
             case "logar":

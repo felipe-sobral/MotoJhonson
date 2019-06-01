@@ -23,6 +23,11 @@
         }
 
     }
+
+    ini_set('display_errors',1);
+    ini_set('display_startup_erros',1);
+    error_reporting(E_ALL);
+
 ?>
 
 <!doctype html>
@@ -50,12 +55,14 @@
         ?>
 
         <div class="rodape">
-            <img src="src/img/logo_preta.svg" style="width: 100px">
-            <ul>
-                <li>Twitter</li>
-                <li>Github</li>
-                <li>Facebook</li>
-            </ul>
+            <img src="src/img/logo_preta.svg" style="width: 100px"><br>
+            
+            <a href="#" target="_BLANK"><i class="fab fa-twitter-square fa-3x"></i></a>
+            
+            <a href="#" target="_BLANK"><i class="fab fa-facebook-square fa-3x"></i></a>
+
+            <a href="#" target="_BLANK"><i class="fab fa-github fa-3x" class="color: #000"></i></a>
+
             <p>2019</p>
         </div>
 

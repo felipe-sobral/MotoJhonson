@@ -20,4 +20,18 @@
                 "cnpj" => $this->cnpj
             ]);
         }
+
+        public function buscar(){
+            $tb_usuarios = "usuarios";
+
+            return parent::selecionar_igual(
+                [$tb_usuarios, $this->tabela],
+                "*",
+                [
+                    "$tb_usuarios.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                    "$tb_usuarios.senha" => $this->senha,
+                    "{$this->tabela}.cnpj" => $this->cnpj
+                ]
+            );
+        }
     }

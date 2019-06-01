@@ -44,7 +44,7 @@
         }
 
         // $parametros => ["usuarios.usuario" => "motoboys.USUARIOS_usuario", "usuarios.senha" => "40bd001563085fc35165329ea1ff5c5ecbdbbeef", "motoboys.cpf" => "0000000002"];
-        // return => "[[v2 => value, v3 => value],"motoboys.USUARIOS_usuario, :v2, :v3"]";
+        // return => "[[v2 => "40bd001563085fc35165329ea1ff5c5ecbdbbeef", v3 => "0000000002"],"motoboys.USUARIOS_usuario, :v2, :v3"]";
         private static function valores($parametros){
 
             $i = 0;
@@ -84,6 +84,53 @@
             }
 
             return false;
+        }
+
+        private static function parametros($parametros){
+
+            // ["disponivel" => 1] -> "disponivel = ':v1'";
+
+            $vetor = [];
+            $v_valores = [];
+
+            foreach($parametros as $key => $value){
+
+                if(strpos($value, ".")){
+                    $vetor[] = "$key = $value";
+                } else {
+                    $vetor[] = "$key = :".sha1($value);
+                    $v_valores += [sha1($value) => $value];
+                }
+                
+            }
+
+            $vetor = implode(", ", $vetor);
+
+            return [$v_valores, $vetor];
+
+        }
+
+
+        // UPDATE {tabela} SET coluna = valor, coluna = valor WHERE condicao = condicao
+        public static function editar($tabelas, $parametros, $condicoes){
+            $tabelas = is_array($tabelas) ? implode(", ", $tabelas) : $tabelas;
+            $base = implode(", ", array_keys($condicoes));
+
+            $param = self::parametros($parametros);
+            $cond = self::valores($condicoes);
+
+            $query = "UPDATE $tabelas SET {$param[1]} WHERE ($base) = ({$cond[1]})";
+
+            $resultado = self::preparar($query, $param[0]+$cond[0]);
+
+            if($resultado){
+                return true;
+            }
+
+            return false;
+
+
+
         }
 
     }
