@@ -1,3 +1,11 @@
+<?php
+
+    isset($_SESSION) ? : session_start();
+    isset($_SESSION["mj_login"]) ? verificar_login() : false;
+
+?>
+
+
 <div id="logar">
     <div class="topo-padrao">
         <div class="row align-items-center" style="width: 100%; height: 100%">

@@ -1,4 +1,11 @@
 <?php
+
+    function verificar_login(){
+        include_once "mj_controller/ControllerUsuario.php";
+
+        ControllerUsuario::verificar_login();
+    }
+
     function navigation(){
 
         $get = isset($_GET["pg"]) ? $_GET["pg"]: "index";

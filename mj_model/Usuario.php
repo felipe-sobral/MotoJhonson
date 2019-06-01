@@ -47,6 +47,14 @@
         public function verificar_usuario(){
             return parent::selecionar_demo($this->usuario, $this->senha);
         }
+
+        public function buscar(){
+            return parent::selecionar_igual(
+                $this->tabela,
+                "*",
+                ["usuario" => $this->usuario, "senha" => $this->senha]
+            );
+        }
         
     }
 

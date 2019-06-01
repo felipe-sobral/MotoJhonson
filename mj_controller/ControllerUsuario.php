@@ -35,6 +35,30 @@
             ];
         }
 
+        public static function verificar_login(){
+
+            isset($_SESSION) ? : session_start();
+            $info = isset($_SESSION["mj_login"]) ? $_SESSION["mj_login"] : false;
+
+            if($info != false){
+                
+                $usr = new Usuario;
+
+                $usr->setUsuario($info["usuario"]);
+                $usr->setSenha($info["senha"]);
+
+                $usr = $usr->buscar();
+
+                if(!empty($usr)){
+                    return true;
+                }
+
+            }
+
+
+            return false;
+        }
+
     }
 
     $controller = new ControllerUsuario;
