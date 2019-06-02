@@ -196,7 +196,9 @@ $("#mj_login").submit(function(){
         acao: "logar"
     }).done(function(retorno){
             
-        console.log(retorno);
+        if(retorno == "#true#"){
+            window.location.assign("?pg=painel");
+        }
 
     })
 

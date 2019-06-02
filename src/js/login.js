@@ -32,3 +32,13 @@ function verificar_sessao(tipo, s_tipo){
 
 }
 
+function deslogar(){
+    $.post("mj_controller/ControllerUsuario.php", {acao: "deslogar"}, function(retorno){
+
+        if(retorno == "#true#"){
+            window.location.assign("?pg=painel");
+        }
+
+    });
+}
+

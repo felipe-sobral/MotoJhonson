@@ -35,7 +35,6 @@
         }
 
         public static function logar($cnpj, $senha){
-
             $empresa = new Empresa;
 
             $empresa->setCnpj($cnpj);
@@ -48,6 +47,7 @@
 
         public static function verificar_session(){
 
+            isset($_SESSION) ? : session_start();
             $info = isset($_SESSION["mj_login"]) ? $_SESSION["mj_login"] : false;
 
             if($info != false){
@@ -59,6 +59,8 @@
                 $m->setCnpj($info["cnpj"]);
 
                 $usr = $m->buscar();
+
+                
 
                 return !empty($usr) ? self::criar_sessao_empresa($usr[0]) : "LOGIN INVÁLIDO";
             }

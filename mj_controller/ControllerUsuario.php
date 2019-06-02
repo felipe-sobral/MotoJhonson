@@ -32,13 +32,24 @@
             
         }
 
+        public static function deslogar(){
+            isset($_SESSION) ? : session_start();
+
+            session_destroy();
+
+            echo "#true#";            
+        }
+
     }
 
-    $controller = new ControllerUsuario;
 
     if(isset($_POST["acao"])){
 
         switch($_POST["acao"]){
+
+            case "deslogar":
+                ControllerUsuario::deslogar();
+                break;
 
         }
 

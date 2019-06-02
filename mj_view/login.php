@@ -2,7 +2,8 @@
 
     isset($_SESSION) ? : session_start();
     echo "<script src='src/js/login.js'></script>";
-    $tipo = isset($_POST["mj_login"]["tipo"]) ? $_POST["mj_login"]["tipo"] : "default";
+    $tipo = isset($_SESSION["mj_login"]["tipo"]) ? $_SESSION["mj_login"]["tipo"] : "default";
+
     echo "<script>verificar_sessao('login', '$tipo');</script>";
 ?>
 
