@@ -1,4 +1,5 @@
 <?php
+
     require_once "ControllerUsuario.php";
     require_once "../mj_model/Motoboy.php";
 
@@ -31,7 +32,7 @@
                 "tipo" => "MOTOJHONSON"
             ];
 
-            print_r($_SESSION["mj_login"]);
+            echo "#true#";
         }
 
         public static function logar($cpf, $senha){
@@ -47,11 +48,13 @@
         }
 
 
-        public static function ficar_disponivel($cpf, $senha, $disponivel){
+        public static function ficar_disponivel($cpf, $usuario, $senha, $disponivel){
             
             $m = new Motoboy;
 
             $m->setCpf($cpf);
+            $m->setSenha($senha);
+            $m->setUsuario($usuario);
 
             if($disponivel == 1 || $disponivel == 0){
                 $m->setDisponivel($disponivel);
@@ -61,12 +64,36 @@
             }
             
             $m = $m->disponivel();
-            
-
+        
             $resposta = $m ? "#true#" : "#false#";
+
+            if($resposta == "#true#"){
+                isset($_SESSION) ? : session_start();
+                $_SESSION["mj_login"]["disponivel"] = $disponivel;
+            }
 
             echo $resposta;
             exit;
+        }
+
+        public static function verificar_session(){
+
+            isset($_SESSION) ? : session_start();
+            $info = isset($_SESSION["mj_login"]) ? $_SESSION["mj_login"] : false;
+
+            if($info != false){
+                $m = new Motoboy;
+
+                $m->setUsuario($info["usuario"]);
+                $m->setSenha($info["senha"]);
+                $m->setCpf($info["cpf"]);
+
+                $usr = $m->buscar();
+
+                return !empty($usr) ? self::criar_sessao_motoboy($usr[0]) : "LOGIN INVÁLIDO";
+            }
+
+            return false;
         }
 
     }
@@ -83,14 +110,14 @@
                 echo ControllerMotoboy::logar($_POST["registro"], $_POST["senha"]);
                 break;
 
-            // case "ficar_disponivel":
-            //     echo ControllerMotoboy::ficar_disponivel($_POST["cpf"], $_POST["senha"], $_POST["disponivel"]);
-            //     break;
-
             case "ficar_disponivel_session":
                 isset($_SESSION) ? : session_start();
                 $dados = isset($_SESSION["mj_login"]) ? $_SESSION["mj_login"] : exit;
-                echo ControllerMotoboy::ficar_disponivel($dados["cpf"], $dados["senha"], $_POST["disponivel"]);
+                echo ControllerMotoboy::ficar_disponivel($dados["cpf"], $dados["usuario"], $dados["senha"], $_POST["disponivel"]);
+                break;
+
+            case "verificar_session":
+                ControllerMotoboy::verificar_session();
                 break;
 
         }

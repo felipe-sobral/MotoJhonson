@@ -1,4 +1,5 @@
 <?php
+
     require_once "ControllerUsuario.php";
     require_once "ControllerEndereco.php";
     require_once "../mj_model/Empresa.php";
@@ -30,7 +31,7 @@
                 "tipo" => "EMPRESA"
             ];
 
-            print_r($_SESSION["mj_login"]);
+            echo "#true#";
         }
 
         public static function logar($cnpj, $senha){
@@ -43,6 +44,26 @@
             $empresa = $empresa->buscar();
 
             return !empty($empresa) ? self::criar_sessao_empresa($empresa[0]) : "LOGIN INVÁLIDO";
+        }
+
+        public static function verificar_session(){
+
+            $info = isset($_SESSION["mj_login"]) ? $_SESSION["mj_login"] : false;
+
+            if($info != false){
+
+                $m = new Empresa;
+
+                $m->setUsuario($info["usuario"]);
+                $m->setSenha($info["senha"]);
+                $m->setCnpj($info["cnpj"]);
+
+                $usr = $m->buscar();
+
+                return !empty($usr) ? self::criar_sessao_empresa($usr[0]) : "LOGIN INVÁLIDO";
+            }
+
+            return false;
         }
 
 
@@ -59,6 +80,12 @@
             case "logar":
                 echo ControllerEmpresa::logar($_POST["registro"], $_POST["senha"]);
                 break;
+
+            case "verificar_session":
+                
+                ControllerEmpresa::verificar_session();
+                break;
+        
 
         }
 

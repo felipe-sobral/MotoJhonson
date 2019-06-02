@@ -52,7 +52,7 @@
             return parent::editar(
                 [$this->tb_usuarios, $this->tabela],
                 ["{$this->tabela}.disponivel" => $this->disponivel],
-                ["{$this->tabela}.cpf" => $this->cpf]
+                ["{$this->tabela}.cpf" => $this->cpf, "{$this->tb_usuarios}.usuario" => $this->usuario, "{$this->tb_usuarios}.senha" => $this->senha]
             );
 
         }

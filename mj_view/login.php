@@ -1,9 +1,12 @@
 <?php
 
     isset($_SESSION) ? : session_start();
-    isset($_SESSION["mj_login"]) ? verificar_login() : false;
-
+    echo "<script src='src/js/login.js'></script>";
+    $tipo = isset($_POST["mj_login"]["tipo"]) ? $_POST["mj_login"]["tipo"] : "default";
+    echo "<script>verificar_sessao('login', '$tipo');</script>";
 ?>
+
+
 
 
 <div id="logar">

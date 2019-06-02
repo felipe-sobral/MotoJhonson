@@ -1,5 +1,3 @@
-
-
 <div class="container" style="margin-top: 2%; margin-bottom: 5%">
 
     <div class="card text-center">
