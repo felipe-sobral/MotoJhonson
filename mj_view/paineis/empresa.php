@@ -8,64 +8,22 @@
         <div class="card-body">
             <div>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                    Solicitar Entregador
-                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#entregadores" onclick="buscar_entregadores()">Solicitar Entregador</button>
 
-
-                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal fade" id="entregadores" tabindex="-1" role="dialog" aria-labelledby="entregadoresTitle" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Entregadores</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
                             <div class="modal-body">
-                              
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Avaliação</th>
-                                        <th scope="col" style="text-align: center">Detalhes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td scope="row">1</td>
-                                            <td>Moto1</td>
-                                            <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-
-                                            <td style="text-align: center">
-                                            
-                                            <button class='btn btn-light'>
-                                                <i class="fas fa-file-contract"></i>
-                                            </button>
-                                            
-                                            
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">2</td>
-                                            <td>Moto2</td>
-                                            <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                                            <td style="text-align: center">
-                                            
-                                                <button class='btn btn-light'>
-                                                    <i class="fas fa-file-contract"></i>                                                
-                                                </button>
-                                            
-                                            </td>
-                                        </tr>
-                                </tbody>
-                                </table>
-
-
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <br>
+                                <h5 class="modal-title" id="entregadoresTitle">Entregadores disponíveis</h5>
+                                <br>
+                                
+                                <div id="tabela_motoboysd"></div>
+                                
                             </div>
 
                         </div>

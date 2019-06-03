@@ -5,6 +5,7 @@
     class Motoboy extends Usuario{
         private $tb_usuarios = "usuarios";
         private $tabela = "motoboys";
+        private static $s_tabela = "motoboys";
         private $cpf;
         private $veiculo;
         private $disponivel;
@@ -45,6 +46,16 @@
                     "{$this->tabela}.cpf" => $this->cpf
                 ]
             );
+        }
+
+        public static function buscar_disponivel(){
+
+            return parent::selecionar_igual(
+                self::$s_tabela,
+                "*",
+                ["disponivel" => 1]
+            );
+
         }
 
         public function disponivel(){

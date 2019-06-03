@@ -96,6 +96,14 @@
             return false;
         }
 
+        public static function buscar_entregadores_disponiveis(){
+
+            $motoboys = Motoboy::buscar_disponivel();
+
+            echo json_encode($motoboys);
+
+        }
+
     }
 
     if(isset($_POST["acao"])){
@@ -118,6 +126,10 @@
 
             case "verificar_session":
                 ControllerMotoboy::verificar_session();
+                break;
+
+            case "buscar_entregadores":
+                ControllerMotoboy::buscar_entregadores_disponiveis();
                 break;
 
         }

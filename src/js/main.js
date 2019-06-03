@@ -230,3 +230,58 @@ function ficar_disponivel(){
     });
 
 }
+
+function gerar_tabela(colunas, linhas){
+    var c = "";
+    var l = "";
+    var html;
+
+    colunas.forEach(function(coluna){
+
+        c += "<th scope='col'>"+coluna+"</th>";
+
+    });
+
+    linhas.forEach(function(motoboy){
+        var atributos = "";
+
+        motoboy.forEach(function(atributo){
+            atributos += "<td>"+atributo+"</td>";
+        });
+
+
+        l += "<tr>"+atributos+"</tr>";
+
+    });
+    
+    html =  "<table class='table table-striped'>"+
+                "<thead><tr>"+ 
+                    c
+                +"</tr></thead>"+
+                "<tbody>"+
+                    l
+                +"</tbody>"+
+            "</table>";
+
+    return html;
+}
+
+
+function buscar_entregadores(){
+
+    $.post("mj_controller/ControllerMotoboy.php", {acao: "buscar_entregadores"}, function(retorno){
+
+        var dados = JSON.parse(retorno);
+        var array = [];
+
+        dados.forEach(function(motoboy){
+            array.push([motoboy[1], motoboy[2], "<button onclick=\"proposta('"+motoboy[1]+"')\" class='btn btn-light'><i class='fas fa-paper-plane'></i></button>"]);
+        });
+
+
+        $("#tabela_motoboysd").html(gerar_tabela(["Usuario", "Avaliação", "Contratar"], array));
+
+    });
+
+    
+}
