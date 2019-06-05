@@ -48,6 +48,25 @@
             );
         }
 
+        public function buscar_usuario(){
+            return parent::selecionar_igual(
+                [$this->tb_usuarios, $this->tabela],
+
+                "{$this->tb_usuarios}.usuario,
+                 {$this->tb_usuarios}.nome,
+                 {$this->tb_usuarios}.telefone,
+                 {$this->tb_usuarios}.email,
+                 {$this->tabela}.cpf,
+                 {$this->tabela}.veiculo,
+                 {$this->tabela}.valor_hora,
+                 {$this->tabela}.valor_fixo,
+                 {$this->tabela}.disponivel",
+
+                ["{$this->tb_usuarios}.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                 "{$this->tabela}.USUARIOS_usuario" => $this->usuario]
+            );
+        }
+
         public static function buscar_disponivel(){
 
             return parent::selecionar_igual(

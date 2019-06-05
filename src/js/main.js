@@ -180,20 +180,22 @@ function cnpj_cpf(codigo){
 
 $("#mj_login").submit(function(){
 
-
     var url = "mj_controller/";
     var tipo = cnpj_cpf($("#mj_cpfcnpj").val());
+    var login;
 
     if(tipo == "CPF"){
         url = url+"ControllerMotoboy.php";
+        login = "logar_motoboy";
     } else if(tipo == "CNPJ"){
         url = url+"ControllerEmpresa.php";
+        login = "logar_empresa";
     }    
 
     $.post(url, {
         registro: $("#mj_cpfcnpj").val(),
         senha: $("#mj_senha").val(),
-        acao: "logar"
+        acao: login
     }).done(function(retorno){
             
         if(retorno == "#true#"){
@@ -279,9 +281,106 @@ function buscar_entregadores(){
         });
 
 
-        $("#tabela_motoboysd").html(gerar_tabela(["Usuario", "Avaliação", "Contratar"], array));
+        $("#entregadores-conteudo").html(gerar_tabela(["Usuario", "Avaliação", "Contratar"], array));
+        $("#entregadores-titulo").html("Entregadores disponíveis");
 
     });
 
-    
+}
+
+function montar_proposta(id_motoboy){
+
+    $.post("mj_controller/ControllerUsuario.php", {acao: "montar_proposta", motoboy: id_motoboy}, function(retorno){
+        
+        var dados = JSON.parse(retorno);
+        var entregador = dados[0];
+        var empresa = dados[1];
+
+        $("#entregadores-conteudo").html(
+            `<div id="proposta-final">
+                <div class="card" style="text-align: left">
+                    <div class="card-header">
+                        Motoboy
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <p>Usuario: ${entregador.usuario}</p>
+                                <p>Nome: ${entregador.nome}</p>
+                                <p>Telefone: ${entregador.telefone}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>E-Mail: ${entregador.email}</p>
+                                <p>CPF: ${entregador.cpf}</p>
+                                <p>Veículo: ${entregador.veiculo}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div class="card" style="text-align: left">
+                    <div class="card-header">
+                        Empresa
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <p>Usuario: ${empresa.usuario}</p>
+                                <p>Nome: ${empresa.nome}</p>
+                                <p>Telefone: ${empresa.telefone}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>E-Mail: ${empresa.email}</p>
+                                <p>CNPJ: ${empresa.cnpj}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card" style="text-align: left">
+                    <div class="card-header">
+                        Valor da proposta
+                    </div>
+                    <div class="card-body">
+
+
+                        <form class="row" id="fazer-proposta">
+                
+                            <div class="form-group col-sm-6">
+                                <label for="valor-proposta">Valor R$</label>
+                                <input type="number" step=0.1 min=0 class="form-control" id="valor-proposta" placeholder="Digite o valor aqui!">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="valor-tipo-proposta">Tipo</label>
+                                <select class="form-control" id="valor-tipo-proposta">
+                                    <option value="0" select>P/ Hora</option>
+                                    <option value="1">P/ Entrega</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12" style="text-align: center">
+                                <button type="submit" class="btn btn-primary">Enviar proposta</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>`
+        );
+
+    });
+
+}
+
+function proposta(id){
+    $("#entregadores-titulo").html("Proposta");
+    montar_proposta(id);
 }

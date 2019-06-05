@@ -4,6 +4,7 @@
 
     class Empresa extends Usuario{
         private $tabela = "empresas";
+        private $tb_usuarios = "usuarios";
         private $cnpj;
 
         public function __construct(){
@@ -22,16 +23,30 @@
         }
 
         public function buscar(){
-            $tb_usuarios = "usuarios";
 
             return parent::selecionar_igual(
-                [$tb_usuarios, $this->tabela],
+                [$this->tb_usuarios, $this->tabela],
                 "*",
                 [
-                    "$tb_usuarios.usuario" => "{$this->tabela}.USUARIOS_usuario",
-                    "$tb_usuarios.senha" => $this->senha,
+                    "{$this->tb_usuarios}.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                    "{$this->tb_usuarios}.senha" => $this->senha,
                     "{$this->tabela}.cnpj" => $this->cnpj
                 ]
+            );
+        }
+
+        public function buscar_usuario(){
+            return parent::selecionar_igual(
+                [$this->tb_usuarios, $this->tabela],
+
+                "{$this->tb_usuarios}.usuario,
+                 {$this->tb_usuarios}.nome,
+                 {$this->tb_usuarios}.telefone,
+                 {$this->tb_usuarios}.email,
+                 {$this->tabela}.cnpj",
+
+                ["{$this->tb_usuarios}.usuario" => "{$this->tabela}.USUARIOS_usuario",
+                 "{$this->tabela}.USUARIOS_usuario" => $this->usuario]
             );
         }
     }

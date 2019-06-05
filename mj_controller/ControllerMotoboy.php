@@ -1,5 +1,4 @@
 <?php
-
     require_once "ControllerUsuario.php";
     require_once "../mj_model/Motoboy.php";
 
@@ -104,6 +103,19 @@
 
         }
 
+        public static function buscar_usuario($usuario){
+            $m = new Motoboy;
+            $m->setUsuario($usuario);
+            
+            return $m->buscar_usuario();
+        }
+
+        public static function buscar_entregador($usuario){
+            $usr = self::buscar_usuario($usuario);
+
+            echo !empty($usr) ? json_encode($usr[0]) : "USUÁRIO INVÁLIDO";
+        }
+
     }
 
     if(isset($_POST["acao"])){
@@ -114,7 +126,7 @@
                 echo ControllerMotoboy::inserir_UM($_POST["usuario"], $_POST["motoboy"]);
                 break;
 
-            case "logar":
+            case "logar_motoboy":
                 echo ControllerMotoboy::logar($_POST["registro"], $_POST["senha"]);
                 break;
 
@@ -130,6 +142,10 @@
 
             case "buscar_entregadores":
                 ControllerMotoboy::buscar_entregadores_disponiveis();
+                break;
+
+            case "buscar_entregador":
+                ControllerMotoboy::buscar_entregador($_POST["usuario"]);
                 break;
 
         }

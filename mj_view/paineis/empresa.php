@@ -10,27 +10,6 @@
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#entregadores" onclick="buscar_entregadores()">Solicitar Entregador</button>
 
-                <div class="modal fade" id="entregadores" tabindex="-1" role="dialog" aria-labelledby="entregadoresTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <br>
-                                <h5 class="modal-title" id="entregadoresTitle">Entregadores disponíveis</h5>
-                                <br>
-                                
-                                <div id="tabela_motoboysd"></div>
-                                
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
                   
 
@@ -157,4 +136,25 @@
         </div>
     </div>
 
+</div>
+
+
+<!-- MODAL -->
+
+<div class="modal fade" id="entregadores" tabindex="-1" role="dialog" aria-labelledby="entregadores-titulo" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="text-align: center">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <br>
+                <h5 class="modal-title" id="entregadores-titulo">Entregadores disponíveis</h5>
+                <br>
+                <div id="entregadores-conteudo"></div>               
+            </div>
+
+        </div>
+    </div>
 </div>

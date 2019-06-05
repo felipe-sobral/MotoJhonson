@@ -60,14 +60,18 @@
 
                 $usr = $m->buscar();
 
-                
-
                 return !empty($usr) ? self::criar_sessao_empresa($usr[0]) : "LOGIN INVÁLIDO";
             }
 
             return false;
         }
 
+        public static function buscar_usuario($usuario){
+            $m = new Empresa;
+            $m->setUsuario($usuario);
+            
+            return $m->buscar_usuario();
+        }
 
     }
 
@@ -79,12 +83,11 @@
                 echo ControllerEmpresa::inserir_UEE($_POST["usuario"], $_POST["empresa"], $_POST["endereco"]);
                 break;
 
-            case "logar":
+            case "logar_empresa":
                 echo ControllerEmpresa::logar($_POST["registro"], $_POST["senha"]);
                 break;
 
             case "verificar_session":
-                
                 ControllerEmpresa::verificar_session();
                 break;
         

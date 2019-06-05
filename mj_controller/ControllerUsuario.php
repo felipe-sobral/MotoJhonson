@@ -1,6 +1,8 @@
 <?php
 
     require_once "../mj_model/Usuario.php";
+    require_once "ControllerMotoboy.php";
+    require_once "ControllerEmpresa.php";
 
     class ControllerUsuario{
 
@@ -40,6 +42,15 @@
             echo "#true#";            
         }
 
+        public static function montar_proposta($motoboy, $empresa){
+
+            $motoboy = ControllerMotoboy::buscar_usuario($motoboy);
+            $empresa = ControllerEmpresa::buscar_usuario($empresa);
+
+            echo json_encode([$motoboy[0], $empresa[0]]);
+
+        }
+
     }
 
 
@@ -49,6 +60,11 @@
 
             case "deslogar":
                 ControllerUsuario::deslogar();
+                break;
+
+            case "montar_proposta":
+                isset($_SESSION) ? : session_start();                
+                ControllerUsuario::montar_proposta($_POST["motoboy"], $_SESSION["mj_login"]["usuario"]);
                 break;
 
         }
