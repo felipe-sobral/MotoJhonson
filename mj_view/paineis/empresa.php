@@ -19,48 +19,11 @@
 
                     <h5 class="card-title">Últimas propostas</h5>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Avaliação</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" style="text-align: center">Detalhes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td scope="row">1</td>
-                                <td>Moto1</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                                <td>Finalizado</td>
-                                <td style="text-align: center">
-                                
-                                <button class='btn btn-light'>
-                                        <i class="fas fa-info-circle"></i>
-                                </button>
-                                
-                                
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row">2</td>
-                                <td>Moto2</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                                <td>Ativo</td>
-                                <td style="text-align: center">
-                                
-                                    <button class='btn btn-light'>
-                                        <i class="fas fa-info-circle"></i>
-                                    </button>
-                                
-                                </td>
-                            </tr>
-                      </tbody>
-                    </table>
+                    <div id="tabela-propostas"></div>
+                    <script>buscar_propostas("*"); </script>
 
                 </div>
+
 
             </div>
             <hr>
@@ -142,7 +105,7 @@
 <!-- MODAL -->
 
 <div class="modal fade" id="entregadores" tabindex="-1" role="dialog" aria-labelledby="entregadores-titulo" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content" style="text-align: center">
 
             <div class="modal-body">

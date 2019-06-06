@@ -9,9 +9,9 @@
             
                 <div class="card-body">
                     <h5 class="card-title">Últimas propostas</h5>
-                    <p class="card-text">
                     
-                    </p>
+                    <div id="tabela-propostas"></div>
+                    <script>buscar_propostas("*"); </script>
 
                 </div>
                 <div class="card-footer text-muted">

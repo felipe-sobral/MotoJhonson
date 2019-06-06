@@ -290,11 +290,17 @@ function buscar_entregadores(){
 
 function montar_proposta(id_motoboy){
 
-    $.post("mj_controller/ControllerUsuario.php", {acao: "montar_proposta", motoboy: id_motoboy}, function(retorno){
+    $.post("mj_controller/ControllerProposta.php", {acao: "montar_proposta", motoboy: id_motoboy}, function(retorno){
         
         var dados = JSON.parse(retorno);
         var entregador = dados[0];
-        var empresa = dados[1];
+        var empresa = dados[1][0];
+        var enderecos = "";
+
+        dados[1][1].forEach(function(endereco){
+            enderecos += `<option value="${endereco.id}">${endereco.municipio}, ${endereco.bairro}, ${endereco.logradouro}, ${endereco.numero}</option>`;
+        });
+
 
         $("#entregadores-conteudo").html(
             `<div id="proposta-final">
@@ -338,6 +344,7 @@ function montar_proposta(id_motoboy){
                             <div class="col-sm-6">
                                 <p>E-Mail: ${empresa.email}</p>
                                 <p>CNPJ: ${empresa.cnpj}</p>
+                                <p>Endereco: <select id="enderecos">${enderecos}</select></p>
                             </div>
 
                         </div>
@@ -354,14 +361,14 @@ function montar_proposta(id_motoboy){
 
 
                         <form class="row" id="fazer-proposta">
-                
+                            <input style="display: none" id="motoboy-usuario" value="${entregador.usuario}"></input>
                             <div class="form-group col-sm-6">
-                                <label for="valor-proposta">Valor R$</label>
-                                <input type="number" step=0.1 min=0 class="form-control" id="valor-proposta" placeholder="Digite o valor aqui!">
+                                <label for="valor-proposta">Valor em R$</label>
+                                <input type="number" step=0.1 min=0 class="form-control" id="valor-proposta" value="${entregador.valor_hora}" placeholder="Digite o valor aqui!">
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="valor-tipo-proposta">Tipo</label>
-                                <select class="form-control" id="valor-tipo-proposta">
+                                <select class="form-control" id="valor-tipo-proposta" onchange="troca_valores()">
                                     <option value="0" select>P/ Hora</option>
                                     <option value="1">P/ Entrega</option>
                                 </select>
@@ -373,7 +380,52 @@ function montar_proposta(id_motoboy){
 
                     </div>
                 </div>
-            </div>`
+            </div>
+            
+            <script>
+            
+                function troca_valores(){
+                    var t = $("#valor-tipo-proposta option:selected").val();
+
+                    if(t == 0){
+                        $("#valor-proposta").val('${entregador.valor_hora}');
+                    } else if(t == 1){
+                        $("#valor-proposta").val('${entregador.valor_fixo}');
+                    }
+                }
+
+                $("#fazer-proposta").submit(function(){
+
+                    var endereco = $("#enderecos option:selected").val();
+                    var valor = $("#valor-proposta").val();
+                    var valor_tipo = $("#valor-tipo-proposta option:selected").val();
+                    var motoboy = $("#motoboy-usuario").val();
+                
+                    if(valor_tipo == 0){
+                        valor_tipo = "HORA";
+                    } else {
+                        valor_tipo = "FIXO";
+                    }
+                
+                
+                    $.post("mj_controller/ControllerProposta.php", {acao: "fazer_proposta", motoboy: motoboy, endereco: endereco, valor: valor, valor_tipo: valor_tipo}, function(retorno){
+                
+                        if(retorno == "#true#"){
+                            buscar_propostas("*"); 
+                            alert("PROPOSTA FEITA!");
+                            $('#entregadores').modal('hide');
+                        } else {
+                            alert("ERRO =(");
+                        }
+                
+                    });
+                
+                    return false;
+                });
+
+            </script>
+
+            `
         );
 
     });

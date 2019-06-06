@@ -18,4 +18,13 @@
             $end->cadastrar();
         }
 
+        public static function buscar_enderecos($usuario){
+
+            $end = new Endereco;
+
+            $end->setUsuario($usuario);
+            return $end->buscar();
+
+        }
+
     }

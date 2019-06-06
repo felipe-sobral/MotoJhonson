@@ -55,4 +55,12 @@
                 "uf" => $this->uf
             ]);
         }
+
+        public function buscar(){
+            return parent::selecionar_igual($this->tabela,
+            "*",
+            [
+                "USUARIOS_usuario" => $this->proprietario
+            ]);
+        }
     }

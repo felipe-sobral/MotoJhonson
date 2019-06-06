@@ -73,6 +73,14 @@
             return $m->buscar_usuario();
         }
 
+        public static function buscarWithEnderecos($usuario){
+            $empresa = self::buscar_usuario($usuario);
+            $enderecos = ControllerEndereco::buscar_enderecos($usuario);
+
+            return [$empresa[0], $enderecos];
+
+        }
+
     }
 
     if(isset($_POST["acao"])){
