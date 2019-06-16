@@ -76,7 +76,7 @@
                                 <?php
 
                                     echo "<strong>Telefone: </strong>{$login['telefone']}<br>";
-                                    echo "<strong>CPF: </strong>{$login['cpf']}<br>";
+                                    echo "<strong id='cpf'>CPF: </strong>{$login['cpf']}<br>";
 
                                     
                                 ?>

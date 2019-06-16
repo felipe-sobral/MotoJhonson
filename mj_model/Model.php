@@ -128,8 +128,24 @@
             }
 
             return false;
+        }
 
 
+        //SELECT * FROM propostas INNER JOIN enderecos ON (propostas.ENDERECOS_id = enderecos.id) WHERE propostas.id = 1 
+        public static function innerjoin($colunas, $inner, $join, $on, $where){
+            $colunas = is_array($colunas) ? implode(", ", $colunas) : $colunas;
+            $base = implode(", ", array_keys($where));
+            $cond = self::valores($where);
+
+            $query = "SELECT $colunas FROM $inner INNER JOIN $join ON ($on) WHERE ($base) = ({$cond[1]})";
+
+            $resultado = self::preparar($query, $cond[0]);
+
+            if($resultado){
+                return $resultado->fetchAll();
+            }
+
+            return false;
 
         }
 

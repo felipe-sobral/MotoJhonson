@@ -5,6 +5,7 @@
     class Proposta extends Model{
         private $tabela = "propostas";
         private static $s_tabela = "propostas";
+        private $id;
         private $motoboy;
         private $empresa;
         private $endereco;
@@ -40,6 +41,10 @@
             $this->situacao = $valor;
         }
 
+        public function setId($valor){
+            $this->id = $valor;
+        }
+
         public function cadastrar(){
             return parent::inserir($this->tabela, [
                 "MOTOBOYS_usuario" => $this->motoboy,
@@ -58,6 +63,17 @@
             return parent::selecionar_igual(self::$s_tabela,
             "*",
             [$tipo => $usuario]+$situacao);
+        }
+
+        public function buscar_proposta(){
+            return parent::innerjoin("*", $this->tabela, "enderecos", "{$this->tabela}.ENDERECOS_id = enderecos.id", ["{$this->tabela}.id" => $this->id]);
+        }
+
+        public function alterar_situacao(){
+            //public static function editar($tabelas, $parametros, $condicoes){
+            $campo = empty($this->motoboy) ? ["EMPRESAS_usuario" => $this->empresa] : ["MOTOBOYS_usuario" => $this->motoboy];   
+
+            return parent::editar($this->tabela, ["situacao" => $this->situacao], ["id" => $this->id]+$campo);
         }
 
         //public function buscar(){}

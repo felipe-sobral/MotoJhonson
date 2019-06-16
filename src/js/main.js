@@ -436,3 +436,141 @@ function proposta(id){
     $("#entregadores-titulo").html("Proposta");
     montar_proposta(id);
 }
+
+function botoes_proposta(id, situacao, tipo){
+
+    if(tipo === "CPF"){
+
+        switch(situacao){
+
+            case "ESPERANDO":
+                return `
+
+                    <button class="btn btn-success" onclick="situacao_proposta(${id}, 'aceitar_proposta')">Aceitar</button> 
+                    <button class="btn btn-danger" onclick="situacao_proposta(${id}, 'recusar_proposta')">Recusar</button>
+                    
+                `;
+
+            case "EM ANDAMENTO":
+                return `
+
+                    Ligando os motores, vamos nessa!
+
+                `;
+
+            case "ACEITA":
+                return `
+
+                    Tudo pronto, agora basta você ir no endereço da empresa! =D
+                    
+                `;
+
+            case "FINALIZADA":
+                return `Proposta finalizada!`;
+
+        }
+
+    } else if(tipo === "CNPJ"){
+
+        switch(situacao){
+
+            case "ESPERANDO":
+                return `Proposta enviada!`
+
+            case "ACEITA":
+                return `<button class="btn btn-primary" onclick="situacao_proposta(${id}, 'emandamento_proposta')">Começar</button>`;
+
+            case "EM ANDAMENTO":
+                return `<button class="btn btn-primary" onclick="situacao_proposta(${id}, 'finalizar_proposta')">Finalizar</button>`;
+
+            case "FINALIZADA":
+                return `Proposta finalizada!`;
+
+        }
+
+    }
+
+    return "aguarde...";
+}
+
+function situacao_proposta(id, tipo){
+    $.post("mj_controller/ControllerProposta.php", {acao: tipo, id: id}, function(retorno){
+
+        alert(retorno);
+        buscar_propostas("*");
+        $("#proposta").modal("toggle");
+
+    });
+}
+
+function abrir_proposta(id){
+
+    $.post("mj_controller/ControllerProposta.php", {acao: "abrir_proposta", id: id}, function(retorno){
+        
+
+        if(retorno){
+
+            var proposta = JSON.parse(retorno);
+            var tipo;
+
+            if($("#cnpj").html()){
+                tipo = "CNPJ";
+            } else {
+                tipo = "CPF"
+            }
+
+            var botoes = botoes_proposta(id, proposta.situacao, tipo);
+
+            console.log(proposta);
+
+            $("#proposta-conteudo").html(`
+            
+                <div class="card" style="text-align: left">
+                    <div class="card-header">
+                        Informações da proposta
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>Empresa: ${proposta.EMPRESAS_usuario}</p>
+                                <p>MotoJhonson: ${proposta.MOTOBOYS_usuario}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>Tipo: ${proposta.valor_tipo}</p>
+                                <p>Valor: R$ ${proposta.valor}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>CEP: ${proposta.cep}</p>
+                                <p>Bairro: ${proposta.bairro}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>Rua: ${proposta.logradouro}</p>
+                                <p>Número: ${proposta.numero}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div style="text-align: center">
+                            <h5>${proposta.situacao}</h5>
+                            ${botoes}
+                        </div>
+                        
+
+                    </div>
+                </div>
+            
+            `);
+
+            $("#proposta").modal("toggle");
+        } else {
+            alert("PROPOSTA NÃO ENCONTRADA");
+        }
+
+    });
+
+    
+    
+}

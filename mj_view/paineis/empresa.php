@@ -59,7 +59,7 @@
                                 <?php
 
                                     echo "<strong>Telefone: </strong>{$login['telefone']}<br>";
-                                    echo "<strong>Cnpj: </strong>{$login['cnpj']}<br>";
+                                    echo "<strong id='cnpj'>Cnpj: </strong>{$login['cnpj']}<br>";
 
                                     
                                 ?>

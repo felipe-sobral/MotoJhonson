@@ -34,4 +34,23 @@
 
    </div>
 
+	<div class="modal fade" id="proposta" tabindex="-1" role="dialog" aria-labelledby="proposta-titulo" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="text-align: center">
+
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<br>
+					<h5 class="modal-title" id="proposta-titulo">Entregadores disponíveis</h5>
+					<br>
+					<div id="proposta-conteudo"></div>
+					<div id="proposta-opcoes"></div>               
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 </div>

@@ -1,8 +1,6 @@
 <?php
 
     require_once "../mj_model/Usuario.php";
-    require_once "ControllerMotoboy.php";
-    require_once "ControllerEmpresa.php";
 
     class ControllerUsuario{
 
